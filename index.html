@@ -1,0 +1,2613 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Velvet Paw - Komunitas Pencinta Kucing</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary-color: #8B7355;
+            --secondary-color: #A68A6D;
+            --accent-color: #D4B896;
+            --background-light: #fefefe;
+            --text-dark: #333333;
+            --text-muted: #666666;
+            --card-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            --card-hover-shadow: 0 8px 20px rgba(0,0,0,0.12);
+            --gradient-primary: linear-gradient(135deg, var(--primary-color) 0%, #7A6349 100%);
+            --gradient-secondary: linear-gradient(135deg, var(--secondary-color) 0%, #8C765A 100%);
+        }
+        
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+            background-color: var(--background-light);
+            color: var(--text-dark);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            padding-top: 70px;
+        }
+        
+        .navbar {
+            background: rgba(255, 255, 255, 0.98) !important;
+            backdrop-filter: blur(10px);
+            padding: 0.7rem 0;
+            box-shadow: 0 2px 15px rgba(0,0,0,0.1);
+            z-index: 1030;
+            transition: all 0.3s ease;
+        }
+        
+        .navbar.scrolled {
+            padding: 0.4rem 0;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+        }
+        
+        .navbar-brand {
+            font-weight: 700;
+            font-size: 1.4rem;
+            color: var(--primary-color) !important;
+        }
+        
+        .nav-link {
+            position: relative;
+            padding: 8px 12px !important;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+            color: var(--text-dark) !important;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        
+        .nav-link:hover {
+            background-color: rgba(139, 115, 85, 0.1);
+            transform: translateY(-2px);
+        }
+        
+        .nav-link.active {
+            color: var(--primary-color) !important;
+            font-weight: 600;
+        }
+        
+        .nav-link.active::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 12px;
+            right: 12px;
+            height: 3px;
+            background-color: var(--primary-color);
+            border-radius: 2px;
+        }
+        
+        .hero-section {
+            background: linear-gradient(135deg, #8B7355 0%, #A68A6D 100%);
+            color: white;
+            border-radius: 0 0 30px 30px;
+            padding: 100px 0 80px;
+            margin-bottom: 30px;
+            margin-top: -70px;
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 320"><path fill="%23ffffff" fill-opacity="0.1" d="M0,96L48,112C96,128,192,160,288,186.7C384,213,480,235,576,213.3C672,192,768,128,864,128C960,128,1056,192,1152,192C1248,192,1344,128,1392,96L1440,64L1440,320L1392,320C1344,320,1248,320,1152,320C1056,320,960,320,864,320C768,320,672,320,576,320C480,320,384,320,288,320C192,320,96,320,48,320L0,320Z"></path></svg>');
+            background-size: cover;
+            background-position: center bottom;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+        }
+        
+        .hero-title {
+            font-size: 2.5rem;
+            font-weight: 800;
+            margin-bottom: 1.2rem;
+            line-height: 1.2;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            max-width: 100%;
+        }
+        
+        .hero-buttons .btn {
+            padding: 12px 25px;
+            border-radius: 50px;
+            font-weight: 600;
+            margin: 0 0 10px 0;
+            transition: all 0.3s ease;
+            width: 100%;
+            max-width: 250px;
+        }
+        
+        .hero-buttons .btn-light {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+        }
+        
+        .hero-buttons .btn-light:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+        }
+        
+        .hero-cat-illustration {
+            position: relative;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        
+        .cat-silhouette {
+            width: 200px;
+            height: 200px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .cat-silhouette::before {
+            content: '';
+            position: absolute;
+            width: 140px;
+            height: 140px;
+            background: rgba(255, 255, 255, 0.3);
+            border-radius: 50%;
+        }
+        
+        .cat-ears {
+            position: absolute;
+            top: -15px;
+            width: 0;
+            height: 0;
+            border-left: 30px solid transparent;
+            border-right: 30px solid transparent;
+            border-bottom: 45px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .cat-ears::before {
+            content: '';
+            position: absolute;
+            top: 7px;
+            left: -22px;
+            width: 0;
+            height: 0;
+            border-left: 22px solid transparent;
+            border-right: 22px solid transparent;
+            border-bottom: 37px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .stats-section {
+            padding: 40px 0;
+            background: #f8f9fa;
+            border-radius: 20px;
+            margin-top: -20px;
+            position: relative;
+            z-index: 2;
+        }
+        
+        .stat-item {
+            text-align: center;
+            padding: 15px;
+        }
+        
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+        }
+        
+        .stat-label {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        
+        .features-section {
+            padding: 3rem 0;
+        }
+        
+        .feature-card {
+            text-align: center;
+            padding: 2rem 1rem;
+            border-radius: 15px;
+            transition: all 0.3s ease;
+            height: 100%;
+            border: 1px solid rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+        }
+        
+        .feature-icon {
+            width: 70px;
+            height: 70px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1.2rem;
+            color: white;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.2rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+        }
+        
+        .feature-card p {
+            font-size: 0.9rem;
+        }
+        
+        .testimonials-section {
+            padding: 3rem 0;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 25px;
+        }
+        
+        .testimonial-card {
+            background: white;
+            border-radius: 15px;
+            padding: 1.5rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-bottom: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .testimonial-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.1);
+        }
+        
+        .testimonial-content {
+            font-style: italic;
+            margin-bottom: 1.2rem;
+            position: relative;
+            font-size: 0.95rem;
+        }
+        
+        .testimonial-content::before {
+            content: '"';
+            font-size: 3rem;
+            color: var(--primary-color);
+            opacity: 0.2;
+            position: absolute;
+            top: -15px;
+            left: -8px;
+        }
+        
+        .testimonial-author {
+            display: flex;
+            align-items: center;
+        }
+        
+        .testimonial-avatar {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-right: 12px;
+        }
+        
+        .testimonial-info h4 {
+            margin: 0;
+            font-size: 1rem;
+            color: var(--primary-color);
+        }
+        
+        .testimonial-info p {
+            margin: 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+        
+        .card {
+            border: none;
+            border-radius: 12px;
+            box-shadow: var(--card-shadow);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            margin-bottom: 20px;
+            overflow: hidden;
+        }
+        
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--card-hover-shadow);
+        }
+        
+        .card-body {
+            padding: 1.5rem;
+        }
+        
+        .btn-primary {
+            background: var(--gradient-primary);
+            border: none;
+            border-radius: 8px;
+            padding: 10px 20px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 115, 85, 0.3);
+        }
+        
+        .btn-interest {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            border-radius: 20px;
+            padding: 8px 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+        
+        .btn-interest:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(139, 115, 85, 0.3);
+        }
+        
+        .btn-outline-primary {
+            color: var(--primary-color);
+            border: 2px solid var(--primary-color);
+            border-radius: 8px;
+            padding: 8px 16px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-outline-primary:hover {
+            background: var(--primary-color);
+            color: white;
+            transform: translateY(-3px);
+        }
+        
+        .btn-mobile {
+            padding: 10px 15px;
+            font-size: 0.9rem;
+        }
+        
+        .section {
+            display: none;
+            min-height: 100vh;
+            padding: 20px 10px;
+        }
+        
+        .active {
+            display: block;
+        }
+        
+        .section-title {
+            font-size: 1.8rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary-color);
+            font-weight: 700;
+            text-align: center;
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 60px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            font-size: 1rem;
+            color: var(--text-muted);
+            text-align: center;
+            max-width: 100%;
+            margin: 0 auto 2rem;
+            padding: 0 10px;
+        }
+        
+        .forum-post {
+            border-left: 4px solid var(--primary-color);
+            padding: 1.5rem;
+            margin-bottom: 20px;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+            transition: all 0.3s ease;
+        }
+        
+        .forum-post:hover {
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+        
+        .forum-username {
+            font-weight: bold;
+            color: var(--primary-color);
+            margin-bottom: 8px;
+            font-size: 1rem;
+        }
+        
+        .post-form {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .comment-section {
+            margin-top: 15px;
+            padding-top: 15px;
+            border-top: 1px solid #eee;
+        }
+        
+        .comment {
+            background-color: #f8f9fa;
+            padding: 10px 14px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            transition: all 0.2s ease;
+        }
+        
+        .comment:hover {
+            background-color: #f0f2f5;
+        }
+        
+        .comment-username {
+            font-weight: bold;
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .comment-text {
+            margin: 0;
+            font-size: 0.85rem;
+        }
+        
+        .comment-form {
+            margin-top: 12px;
+        }
+        
+        .profile-img {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin: 0 auto 15px;
+            display: block;
+            border: 4px solid var(--primary-color);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+        }
+        
+        .profile-icon {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            object-fit: cover;
+            cursor: pointer;
+            border: 2px solid white;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .profile-icon:hover {
+            transform: scale(1.1);
+        }
+        
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .profile-image-upload {
+            position: relative;
+            display: inline-block;
+            margin-bottom: 15px;
+            width: 120px;
+            height: 120px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .profile-image-upload .profile-img {
+            cursor: pointer;
+            transition: opacity 0.3s ease;
+            width: 100%;
+            height: 100%;
+        }
+        
+        .profile-image-upload:hover .profile-img {
+            opacity: 0.8;
+        }
+        
+        .profile-image-upload .upload-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 120px;
+            height: 120px;
+            background: rgba(0,0,0,0.5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            cursor: pointer;
+            border: 4px solid var(--primary-color);
+            box-sizing: border-box;
+        }
+        
+        .profile-image-upload:hover .upload-overlay {
+            opacity: 1;
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .file-info {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            text-align: center;
+            margin-top: 5px;
+        }
+        
+        .settings-option {
+            margin-bottom: 20px;
+            padding-bottom: 15px;
+            border-bottom: 1px solid #eee;
+        }
+        
+        .settings-option h3 {
+            font-size: 1.1rem;
+            margin-bottom: 0.8rem;
+            color: var(--primary-color);
+        }
+        
+        .event-date {
+            font-size: 0.85rem;
+            color: var(--primary-color);
+            font-weight: 600;
+        }
+        
+        .create-event-form {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 10px;
+            margin-bottom: 25px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.05);
+        }
+        
+        .donation-amounts button {
+            margin: 5px;
+            border-radius: 8px;
+            transition: all 0.2s ease;
+        }
+        
+        .donation-btn {
+            background: var(--gradient-primary);
+            color: white;
+            border: none;
+            padding: 12px 18px;
+            border-radius: 8px;
+            margin-top: 15px;
+            width: 100%;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        
+        .donation-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 8px 20px rgba(139, 115, 85, 0.3);
+        }
+        
+        .login-required {
+            background-color: #fff3cd;
+            border: 1px solid #ffeaa7;
+            padding: 15px;
+            border-radius: 8px;
+            text-align: center;
+            margin-bottom: 15px;
+        }
+        
+        .post-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 8px;
+            margin: 8px 0;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .image-preview {
+            max-width: 150px;
+            max-height: 150px;
+            margin: 8px 0;
+            border-radius: 8px;
+            display: none;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .modal-content {
+            border-radius: 12px;
+            border: none;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .modal-header {
+            border-bottom: 1px solid #eee;
+            padding: 1.2rem;
+        }
+        
+        .modal-body {
+            padding: 1.2rem;
+        }
+        
+        .modal-footer {
+            border-top: 1px solid #eee;
+            padding: 1.2rem;
+        }
+        
+        .login-required-modal .modal-header {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+        
+        .login-required-modal .modal-footer {
+            border-top: none;
+            padding-top: 0;
+        }
+        
+        .form-control {
+            border-radius: 8px;
+            padding: 10px 12px;
+            border: 1px solid #ddd;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .form-control:focus {
+            border-color: var(--primary-color);
+            box-shadow: 0 0 0 0.2rem rgba(139, 115, 85, 0.25);
+        }
+        
+        .alert {
+            border-radius: 8px;
+            border: none;
+            padding: 12px 15px;
+        }
+        
+        footer {
+            background: var(--gradient-primary);
+            color: white;
+            padding: 3rem 0 1.5rem;
+            margin-top: 3rem;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-about {
+            flex: 1;
+            min-width: 100%;
+            margin-right: 0;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links {
+            flex: 1;
+            min-width: 50%;
+            margin-bottom: 1.5rem;
+        }
+        
+        .footer-links h4, .footer-newsletter h4 {
+            font-size: 1.1rem;
+            margin-bottom: 1rem;
+            position: relative;
+        }
+        
+        .footer-links h4::after, .footer-newsletter h4::after {
+            content: '';
+            position: absolute;
+            bottom: -0.5rem;
+            left: 0;
+            width: 30px;
+            height: 2px;
+            background: white;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+            padding: 0;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.6rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            transition: color 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .footer-links a:hover {
+            color: white;
+        }
+        
+        .footer-newsletter {
+            flex: 1;
+            min-width: 100%;
+            margin-bottom: 1.5rem;
+        }
+        
+        .newsletter-form {
+            display: flex;
+            margin-bottom: 0.8rem;
+        }
+        
+        .newsletter-input {
+            flex: 1;
+            padding: 0.6rem;
+            border: none;
+            border-radius: 5px 0 0 5px;
+            font-size: 0.9rem;
+        }
+        
+        .newsletter-btn {
+            background: white;
+            color: var(--primary-color);
+            border: none;
+            padding: 0 1.2rem;
+            border-radius: 0 5px 5px 0;
+            cursor: pointer;
+            transition: background 0.3s;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        .newsletter-btn:hover {
+            background: #f0f0f0;
+        }
+        
+        .social-links {
+            display: flex;
+            margin-top: 1.2rem;
+        }
+        
+        .social-link {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-right: 0.8rem;
+            transition: all 0.3s;
+        }
+        
+        .social-link:hover {
+            background: white;
+            color: var(--primary-color);
+            transform: translateY(-3px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.8rem;
+        }
+        
+        .back-to-top {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 45px;
+            height: 45px;
+            background: var(--gradient-primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 1000;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .back-to-top.show {
+            opacity: 1;
+            visibility: visible;
+        }
+        
+        .back-to-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+        
+        @media (max-width: 992px) {
+            body {
+                padding-top: 68px;
+            }
+            
+            .hero-section {
+                margin-top: -68px;
+                padding: 80px 0 60px;
+            }
+            
+            .section {
+                padding: 15px 8px;
+            }
+            
+            .hero-title {
+                font-size: 2.2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.6rem;
+            }
+            
+            .feature-card {
+                padding: 1.5rem 1rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding-top: 64px;
+            }
+            
+            .hero-section {
+                margin-top: -64px;
+                padding: 70px 0 50px;
+            }
+            
+            .section {
+                padding: 12px 6px;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 0.95rem;
+            }
+            
+            .section-title {
+                font-size: 1.5rem;
+            }
+            
+            .card-body {
+                padding: 1.2rem;
+            }
+            
+            .forum-post {
+                padding: 1.2rem;
+            }
+            
+            .user-name {
+                display: none;
+            }
+            
+            .navbar-brand {
+                font-size: 1.3rem;
+            }
+            
+            .nav-link span {
+                display: none;
+            }
+            
+            .nav-link.active::after {
+                bottom: -5px;
+                left: 8px;
+                right: 8px;
+            }
+            
+            .hero-buttons .btn {
+                max-width: 100%;
+            }
+            
+            .footer-about, .footer-links, .footer-newsletter {
+                min-width: 100%;
+            }
+            
+            .footer-links {
+                margin-bottom: 1rem;
+            }
+        }
+        
+        @media (max-width: 576px) {
+            body {
+                padding-top: 60px;
+            }
+            
+            .hero-section {
+                margin-top: -60px;
+                padding: 60px 0 40px;
+            }
+            
+            .hero-title {
+                font-size: 1.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 0.9rem;
+            }
+            
+            .section-title {
+                font-size: 1.4rem;
+            }
+            
+            .nav-link.active::after {
+                bottom: -3px;
+                left: 5px;
+                right: 5px;
+            }
+            
+            .stats-section {
+                padding: 30px 0;
+                border-radius: 15px;
+                margin-top: -15px;
+            }
+            
+            .stat-number {
+                font-size: 1.7rem;
+            }
+            
+            .stat-label {
+                font-size: 0.8rem;
+            }
+            
+            .features-section, .testimonials-section {
+                padding: 2rem 0;
+            }
+            
+            .testimonial-card {
+                padding: 1.2rem;
+            }
+        }
+        
+        .btn, .form-control, .form-check-input {
+            touch-action: manipulation;
+        }
+        
+        @media screen and (max-width: 768px) {
+            input, select, textarea {
+                font-size: 16px;
+            }
+        }
+        
+        @media (min-width: 769px) {
+            .nav-link span {
+                display: inline !important;
+            }
+            
+            .user-info .user-name {
+                display: block;
+            }
+            
+            .nav-item {
+                margin: 0 5px;
+            }
+            
+            .footer-about {
+                min-width: 300px;
+                margin-right: 2rem;
+            }
+            
+            .footer-links {
+                min-width: 150px;
+            }
+            
+            .footer-newsletter {
+                min-width: 250px;
+            }
+        }
+        
+        @media (min-width: 992px) {
+            .hero-title {
+                font-size: 2.8rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg fixed-top">
+        <div class="container">
+            <a class="navbar-brand d-flex align-items-center" href="#">
+                <i class="fas fa-paw me-2"></i>
+                <span>Velvet Paw</span>
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" href="#" data-target="home">
+                            <i class="fas fa-home me-1"></i> <span>Beranda</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-target="forum">
+                            <i class="fas fa-comments me-1"></i> <span>Forum</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-target="event">
+                            <i class="fas fa-calendar-alt me-1"></i> <span>Event</span>
+                        </a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#" data-target="donation">
+                            <i class="fas fa-hand-holding-heart me-1"></i> <span>Donasi</span>
+                        </a>
+                    </li>
+                </ul>
+                <div class="ms-lg-3 ms-md-2 ms-1" id="userSection">
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-labelledby="loginModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginModalLabel">Login ke Velvet Paw</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="loginForm">
+                        <div class="mb-3">
+                            <label for="loginUsername" class="form-label">Username atau Email</label>
+                            <input type="text" class="form-control" id="loginUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="loginPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="loginPassword" required>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="rememberMe">
+                            <label class="form-check-label" for="rememberMe">
+                                Ingat saya
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 btn-mobile">Login</button>
+                    </form>
+                    <div class="create-account-link">
+                        <p>Belum punya akun? <a href="#" id="showRegisterForm">Buat akun di sini</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="registerModal" tabindex="-1" aria-labelledby="registerModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="registerModalLabel">Buat Akun Baru</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="registerForm">
+                        <div class="mb-3">
+                            <label for="registerName" class="form-label">Nama Lengkap</label>
+                            <input type="text" class="form-control" id="registerName" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerUsername" class="form-label">Username</label>
+                            <input type="text" class="form-control" id="registerUsername" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerEmail" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="registerEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPhone" class="form-label">Nomor Telepon</label>
+                            <input type="tel" class="form-control" id="registerPhone">
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerBio" class="form-label">Bio</label>
+                            <textarea class="form-control" id="registerBio" rows="3" placeholder="Ceritakan sedikit tentang Anda dan kucing kesayangan Anda"></textarea>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerPassword" class="form-label">Password</label>
+                            <input type="password" class="form-control" id="registerPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="registerConfirmPassword" class="form-label">Konfirmasi Password</label>
+                            <input type="password" class="form-control" id="registerConfirmPassword" required>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="agreeTerms" required>
+                            <label class="form-check-label" for="agreeTerms">
+                                Saya setuju dengan <a href="#">syarat dan ketentuan</a>
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 btn-mobile">Daftar</button>
+                    </form>
+                    <div class="create-account-link">
+                        <p>Sudah punya akun? <a href="#" id="showLoginForm">Login di sini</a></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="donationModal" tabindex="-1" aria-labelledby="donationModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="donationModalLabel">Konfirmasi Donasi</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p>Apakah Anda yakin ingin mendonasikan <strong id="donationAmountText">Rp 0</strong>?</p>
+                    <p>Donasi Anda akan digunakan untuk:</p>
+                    <ul>
+                        <li>Pemeliharaan website</li>
+                        <li>Event komunitas</li>
+                        <li>Program kesehatan kucing</li>
+                    </ul>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary btn-mobile" data-bs-dismiss="modal">Batal</button>
+                    <button type="button" class="btn btn-primary btn-mobile" id="confirmDonation">Ya, Donasi Sekarang</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="resetPasswordModal" tabindex="-1" aria-labelledby="resetPasswordModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="resetPasswordModalLabel">Reset Password</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="resetPasswordForm">
+                        <div class="mb-3">
+                            <label for="currentPassword" class="form-label">Password Saat Ini</label>
+                            <input type="password" class="form-control" id="currentPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="newPassword" class="form-label">Password Baru</label>
+                            <input type="password" class="form-control" id="newPassword" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmNewPassword" class="form-label">Konfirmasi Password Baru</label>
+                            <input type="password" class="form-control" id="confirmNewPassword" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 btn-mobile">Reset Password</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="changeEmailModal" tabindex="-1" aria-labelledby="changeEmailModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="changeEmailModalLabel">Ubah Email</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="changeEmailForm">
+                        <div class="mb-3">
+                            <label for="currentEmail" class="form-label">Email Saat Ini</label>
+                            <input type="email" class="form-control" id="currentEmail" readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="newEmail" class="form-label">Email Baru</label>
+                            <input type="email" class="form-control" id="newEmail" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="confirmPasswordEmail" class="form-label">Konfirmasi Password</label>
+                            <input type="password" class="form-control" id="confirmPasswordEmail" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary w-100 btn-mobile">Ubah Email</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade login-required-modal" id="loginRequiredModal" tabindex="-1" aria-labelledby="loginRequiredModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="loginRequiredModalLabel">Login Diperlukan</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <i class="fas fa-exclamation-circle fa-3x text-warning mb-3"></i>
+                    <p>Anda harus login untuk mengikuti event ini</p>
+                </div>
+                <div class="modal-footer justify-content-center">
+                    <button type="button" class="btn btn-secondary btn-mobile me-2" data-bs-dismiss="modal">Tutup</button>
+                    <button type="button" class="btn btn-primary btn-mobile" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#loginModal">Login</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section id="home" class="section active">
+        <div class="hero-section">
+            <div class="container">
+                <div class="row align-items-center">
+                    <div class="col-lg-6 hero-content">
+                        <h1 class="hero-title">Komunitas Pencinta Kucing Terbesar di Indonesia</h1>
+                        <p class="hero-subtitle">Bergabunglah dengan ribuan pecinta kucing lainnya untuk berbagi pengalaman, tips perawatan, dan ikuti event seru seputar kucing.</p>
+                        <div class="hero-buttons text-center text-lg-start">
+                            <button class="btn btn-light btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal">Bergabung Sekarang</button>
+                        </div>
+                    </div>
+                    <div class="col-lg-6">
+                        <div class="hero-cat-illustration">
+                            <div class="cat-silhouette">
+                                <div class="cat-ears"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="stats-section">
+                <div class="row text-center">
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <div class="stat-number">10K+</div>
+                            <div class="stat-label">Anggota</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <div class="stat-number">5K+</div>
+                            <div class="stat-label">Postingan</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <div class="stat-number">200+</div>
+                            <div class="stat-label">Event</div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 col-6">
+                        <div class="stat-item">
+                            <div class="stat-number">50+</div>
+                            <div class="stat-label">Kota</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="container">
+            <div class="row justify-content-center features-section">
+                <div class="col-12">
+                    <h2 class="section-title">Mengapa Bergabung dengan Velvet Paw?</h2>
+                    <p class="section-subtitle">Temukan semua yang Anda butuhkan sebagai pencinta kucing dalam satu komunitas yang hangat dan supportive</p>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="card feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-comments"></i>
+                                </div>
+                                <h3>Forum Diskusi</h3>
+                                <p>Berbagi pengalaman dan tanya jawab tentang kucing dengan komunitas pencinta kucing lainnya.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-calendar-alt"></i>
+                                </div>
+                                <h3>Event Komunitas</h3>
+                                <p>Ikuti atau buat event kucing di daerah Anda dan bertemu dengan sesama pencinta kucing.</p>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="card feature-card">
+                                <div class="feature-icon">
+                                    <i class="fas fa-hand-holding-heart"></i>
+                                </div>
+                                <h3>Program Donasi</h3>
+                                <p>Dukung program kesehatan dan kesejahteraan kucing melalui donasi Anda.</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row justify-content-center testimonials-section">
+                <div class="col-12">
+                    <h2 class="section-title">Apa Kata Mereka?</h2>
+                    <p class="section-subtitle">Dengarkan pengalaman langsung dari anggota komunitas Velvet Paw</p>
+                    
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="testimonial-card">
+                                <div class="testimonial-content">
+                                    "Sejak bergabung dengan Velvet Paw, saya mendapatkan banyak tips merawat kucing yang sangat membantu. Komunitasnya sangat ramah dan supportive!"
+                                </div>
+                                <div class="testimonial-author">
+                                    <img src="https://via.placeholder.com/50" alt="User" class="testimonial-avatar">
+                                    <div class="testimonial-info">
+                                        <h4>Sarah Wijaya</h4>
+                                        <p>Anggota sejak 2022</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="testimonial-card">
+                                <div class="testimonial-content">
+                                    "Event kucing yang diadakan Velvet Paw selalu seru! Saya sudah menemukan banyak teman sesama pecinta kucing di sini."
+                                </div>
+                                <div class="testimonial-author">
+                                    <img src="https://via.placeholder.com/50" alt="User" class="testimonial-avatar">
+                                    <div class="testimonial-info">
+                                        <h4>Budi Santoso</h4>
+                                        <p>Anggota sejak 2021</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="testimonial-card">
+                                <div class="testimonial-content">
+                                    "Donasi yang saya berikan melalui Velvet Paw benar-benar membantu kucing-kucing jalanan. Senang bisa berkontribusi melalui platform ini."
+                                </div>
+                                <div class="testimonial-author">
+                                    <img src="https://via.placeholder.com/50" alt="User" class="testimonial-avatar">
+                                    <div class="testimonial-info">
+                                        <h4>Diana Putri</h4>
+                                        <p>Anggota sejak 2020</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="forum" class="section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="section-title mb-4"><i class="fas fa-comments me-2"></i>Forum Diskusi</h1>
+                            <p class="section-subtitle">Bergabung dalam discusi dengan komunitas pencinta kucing lainnya</p>
+                            
+                            <div id="postFormContainer">
+                            </div>
+                            
+                            <hr>
+                            
+                            <div id="postsContainer">
+                                <div class="forum-post" data-post-id="1">
+                                    <p class="forum-username">iburatna357</p>
+                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                                    
+                                    <div class="comment-section">
+                                        <h6 class="mb-3">Komentar (2)</h6>
+                                        
+                                        <div class="comment">
+                                            <p class="comment-username">sangpencintakucing</p>
+                                            <p class="comment-text">Setuju banget! Saya juga punya pengalaman serupa dengan kucing saya.</p>
+                                        </div>
+                                        
+                                        <div class="comment">
+                                            <p class="comment-username">catlover123</p>
+                                            <p class="comment-text">Terima kasih untuk sharingnya, sangat membantu!</p>
+                                        </div>
+                                        
+                                        <div class="comment-form-container">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="forum-post" data-post-id="2">
+                                    <p class="forum-username">istribudiman727</p>
+                                    <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                                    
+                                    <div class="comment-section">
+                                        <h6 class="mb-3">Komentar (1)</h6>
+                                        
+                                        <div class="comment">
+                                            <p class="comment-username">kucingmania</p>
+                                            <p class="comment-text">Info yang sangat bermanfaat, terima kasih!</p>
+                                        </div>
+                                        
+                                        <div class="comment-form-container">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="event" class="section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="section-title mb-4"><i class="fas fa-calendar-alt me-2"></i>Event Kucing</h1>
+                            <p class="section-subtitle">Temukan dan ikuti event kucing di sekitar Anda</p>
+                            
+                            <div id="createEventContainer">
+                            </div>
+                            
+                            <hr>
+                            
+                            <div id="eventsContainer">
+                                <div class="card event-card" data-event-id="1">
+                                    <div class="card-body">
+                                        <p class="event-date">30 Februari 2097</p>
+                                        <h2 class="h4 mb-3">Seminar bagaimana anda bisa mengenal kucing anda lebih dekat lagi oleh dokter budiman</h2>
+                                        <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
+                                        <div class="d-flex justify-content-between align-items-center mt-4 flex-column flex-md-row">
+                                            <div class="mb-3 mb-md-0">
+                                                <p class="mb-0"><i class="fas fa-map-marker-alt me-2"></i>JL.manusia no 87</p>
+                                            </div>
+                                            <button class="btn btn-interest btn-mobile interest-btn">
+                                                <i class="fas fa-heart me-2"></i>Tertarik
+                                            </button>
+                                        </div>
+                                        <div class="mt-3">
+                                            <p><strong>120 orang</strong> tertarik dengan event ini</p>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="donation" class="section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="section-title mb-4"><i class="fas fa-hand-holding-heart me-2"></i>Donasi</h1>
+                            <p class="section-subtitle">Bantu kami menjaga komunitas ini tetap aktif dan mendukung program kesejahteraan kucing</p>
+                            
+                            <div class="mb-3">
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="donationType" id="oneTime" checked>
+                                    <label class="form-check-label" for="oneTime">Sekali</label>
+                                </div>
+                                <div class="form-check form-check-inline">
+                                    <input class="form-check-input" type="radio" name="donationType" id="monthly">
+                                    <label class="form-check-label" for="monthly">Bulanan</label>
+                                </div>
+                            </div>
+                            
+                            <div class="donation-amounts mb-4">
+                                <div class="row">
+                                    <div class="col-6 mb-2">
+                                        <button class="btn btn-outline-secondary w-100 donation-option btn-mobile" data-amount="50000">Rp. 50.000,00</button>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <button class="btn btn-outline-secondary w-100 donation-option btn-mobile" data-amount="100000">Rp. 100.000,00</button>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <button class="btn btn-outline-secondary w-100 donation-option btn-mobile" data-amount="150000">Rp. 150.000,00</button>
+                                    </div>
+                                    <div class="col-6 mb-2">
+                                        <div class="input-group">
+                                            <span class="input-group-text">Rp</span>
+                                            <input type="text" class="form-control" id="customAmount" placeholder="masukan jumlah...">
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <button class="btn donation-btn w-100 btn-mobile" id="donateButton">
+                                <i class="fas fa-gift me-2"></i>Donasi Sekarang
+                            </button>
+                            
+                            <p class="mb-4 mt-4">Donasi anda sangat berarti untuk website kami</p>
+                            <p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="profile" class="section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <div class="profile-image-upload">
+                                <img src="https://via.placeholder.com/150" alt="Profile Picture" class="profile-img" id="profilePicture">
+                                <div class="upload-overlay">
+                                    <i class="fas fa-camera fa-2x"></i>
+                                </div>
+                                <input type="file" class="file-input" id="profileImageInput" accept="image/*">
+                            </div>
+                            <p class="file-info">Klik gambar untuk mengubah foto profil. Maksimal 2 MB.</p>
+                            <div id="profileImageAlert" class="alert alert-danger d-none" role="alert"></div>
+                            
+                            <h1 class="section-title mb-3"><i class="fas fa-user me-2"></i>Profil Saya</h1>
+                            
+                            <form id="profileForm">
+                                <div class="mb-3">
+                                    <label for="fullName" class="form-label">Nama Lengkap</label>
+                                    <input type="text" class="form-control" id="fullName" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="profileUsername" class="form-label">Username</label>
+                                    <input type="text" class="form-control" id="profileUsername" required readonly>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="profileEmail" class="form-label">Email</label>
+                                    <input type="email" class="form-control" id="profileEmail" required>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="profilePhone" class="form-label">Nomor Telepon</label>
+                                    <input type="tel" class="form-control" id="profilePhone">
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="profileBio" class="form-label">Bio</label>
+                                    <textarea class="form-control" id="profileBio" rows="3"></textarea>
+                                </div>
+                                
+                                <div class="mb-3">
+                                    <label for="joinDate" class="form-label">Bergabung Sejak</label>
+                                    <input type="text" class="form-control" id="joinDate" readonly>
+                                </div>
+                                
+                                <button type="submit" class="btn btn-primary btn-mobile">
+                                    <i class="fas fa-save me-1"></i> Simpan Perubahan
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                    
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h2 class="h4 mb-3">Statistik Saya</h2>
+                            <div class="row text-center">
+                                <div class="col-4">
+                                    <h3 id="postCount">0</h3>
+                                    <p><i class="fas fa-comment me-1"></i> Postingan</p>
+                                </div>
+                                <div class="col-4">
+                                    <h3 id="eventCount">0</h3>
+                                    <p><i class="fas fa-calendar-check me-1"></i> Event</p>
+                                </div>
+                                <div class="col-4">
+                                    <h3 id="catCount">0</h3>
+                                    <p><i class="fas fa-cat me-1"></i> Kucing</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-body">
+                            <h2 class="h4 mb-3"><i class="fas fa-shield-alt me-2"></i>Keamanan</h2>
+                            <div class="d-grid gap-2 d-md-block">
+                                <button class="btn btn-outline-primary me-2 mb-2 btn-mobile" data-bs-toggle="modal" data-bs-target="#resetPasswordModal">
+                                    <i class="fas fa-key me-1"></i> Reset Password
+                                </button>
+                                <button class="btn btn-outline-primary mb-2 btn-mobile" data-bs-toggle="modal" data-bs-target="#changeEmailModal">
+                                    <i class="fas fa-envelope me-1"></i> Change Email
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="card mt-4">
+                        <div class="card-body text-center">
+                            <button class="btn btn-outline-danger btn-mobile" id="logoutButton">
+                                <i class="fas fa-sign-out-alt me-1"></i> Logout
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="settings" class="section">
+        <div class="container">
+            <div class="row justify-content-center">
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-body">
+                            <h1 class="section-title mb-4"><i class="fas fa-cog me-2"></i>Pengaturan</h1>
+                            
+                            <div class="settings-option">
+                                <h3 class="h5"><i class="fas fa-bell me-2"></i>Notifikasi</h3>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="notifPost" checked>
+                                    <label class="form-check-label" for="notifPost">Notifikasi untuk postingan baru</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="notifEvent" checked>
+                                    <label class="form-check-label" for="notifEvent">Notifikasi untuk event baru</label>
+                                </div>
+                                <div class="form-check form-switch">
+                                    <input class="form-check-input" type="checkbox" id="notifMessage">
+                                    <label class="form-check-label" for="notifMessage">Notifikasi untuk pesan pribadi</label>
+                                </div>
+                            </div>
+                            
+                            <div class="settings-option">
+                                <h3 class="h5"><i class="fas fa-lock me-2"></i>Privasi</h3>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="privacy" id="privacyPublic" checked>
+                                    <label class="form-check-label" for="privacyPublic">Profil publik</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="privacy" id="privacyPrivate">
+                                    <label class="form-check-label" for="privacyPrivate">Profil pribadi</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" id="showEmail">
+                                    <label class="form-check-label" for="showEmail">Tampilkan email di profil</label>
+                                </div>
+                            </div>
+                            
+                            <div class="settings-option">
+                                <h3 class="h5"><i class="fas fa-palette me-2"></i>Tampilan</h3>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="theme" id="themeLight" checked>
+                                    <label class="form-check-label" for="themeLight">Tema Terang</label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="theme" id="themeDark">
+                                    <label class="form-check-label" for="themeDark">Tema Gelap</label>
+                                </div>
+                            </div>
+                            
+                            <div class="d-grid gap-2 mt-4">
+                                <button class="btn btn-primary btn-mobile">
+                                    <i class="fas fa-save me-1"></i> Simpan Pengaturan
+                                </button>
+                                <button class="btn btn-outline-secondary btn-mobile">
+                                    <i class="fas fa-undo me-1"></i> Reset ke Default
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-about">
+                    <div class="footer-logo">Velvet Paw</div>
+                    <p>Komunitas pencinta kucing terbesar di Indonesia. Temukan informasi, bagikan pengalaman, dan bergabung dengan komunitas pecinta kucing di seluruh negeri.</p>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+                <div class="footer-links">
+                    <h4>Tautan Cepat</h4>
+                    <ul>
+                        <li><a href="#" data-target="home">Beranda</a></li>
+                        <li><a href="#" data-target="forum">Forum</a></li>
+                        <li><a href="#" data-target="event">Event</a></li>
+                        <li><a href="#" data-target="donation">Donasi</a></li>
+                    </ul>
+                </div>
+                <div class="footer-newsletter">
+                    <h4>Newsletter</h4>
+                    <p>Berlangganan newsletter kami untuk mendapatkan update terbaru tentang event dan informasi kucing.</p>
+                    <form class="newsletter-form">
+                        <input type="email" class="newsletter-input" placeholder="Email Anda" required>
+                        <button type="submit" class="newsletter-btn"><i class="fas fa-paper-plane"></i></button>
+                    </form>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 Velvet Paw. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <a href="#" class="back-to-top">
+        <i class="fas fa-chevron-up"></i>
+    </a>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        let isLoggedIn = false;
+        let currentUser = null;
+        let events = [
+            {
+                id: 1,
+                name: "Seminar bagaimana anda bisa mengenal kucing anda lebih dekat lagi oleh dokter budiman",
+                description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.",
+                location: "JL.manusia no 87",
+                date: "30 Februari 2097",
+                interestedCount: 120
+            }
+        ];
+
+        function setupCommentForms() {
+            document.addEventListener('submit', function(e) {
+                if (e.target && e.target.classList.contains('comment-form')) {
+                    e.preventDefault();
+                    
+                    if (!isLoggedIn) {
+                        alert('Anda harus login untuk menambahkan komentar.');
+                        return;
+                    }
+                    
+                    const commentInput = e.target.querySelector('input');
+                    const commentText = commentInput.value.trim();
+                    
+                    if (commentText) {
+                        const commentSection = e.target.closest('.comment-section');
+                        const commentCountElement = commentSection.querySelector('h6');
+                        const currentCount = parseInt(commentCountElement.textContent.match(/\d+/)[0]) || 0;
+                        
+                        const newComment = document.createElement('div');
+                        newComment.className = 'comment';
+                        newComment.innerHTML = `
+                            <p class="comment-username">${currentUser.username}</p>
+                            <p class="comment-text">${commentText}</p>
+                        `;
+                        
+                        commentSection.insertBefore(newComment, e.target);
+                        
+                        commentCountElement.textContent = `Komentar (${currentCount + 1})`;
+                        
+                        commentInput.value = '';
+                        
+                        alert('Komentar berhasil ditambahkan!');
+                    }
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', function() {
+            setupCommentForms();
+            
+            const backToTopButton = document.querySelector('.back-to-top');
+            
+            window.addEventListener('scroll', () => {
+                if (window.pageYOffset > 300) {
+                    backToTopButton.classList.add('show');
+                } else {
+                    backToTopButton.classList.remove('show');
+                }
+                
+                const navbar = document.querySelector('.navbar');
+                if (window.pageYOffset > 50) {
+                    navbar.classList.add('scrolled');
+                } else {
+                    navbar.classList.remove('scrolled');
+                }
+            });
+            
+            backToTopButton.addEventListener('click', (e) => {
+                e.preventDefault();
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            });
+            
+            const sections = document.querySelectorAll('.section');
+            
+            function getAllNavLinks() {
+                return document.querySelectorAll('.nav-link');
+            }
+            
+            function showSection(sectionId) {
+                sections.forEach(section => {
+                    section.classList.remove('active');
+                });
+                
+                const navLinks = getAllNavLinks();
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                });
+                
+                document.getElementById(sectionId).classList.add('active');
+                
+                const activeLink = document.querySelector(`[data-target="${sectionId}"]`);
+                if (activeLink) {
+                    activeLink.classList.add('active');
+                }
+                
+                const navbarCollapse = document.getElementById('navbarNav');
+                if (navbarCollapse && navbarCollapse.classList.contains('show')) {
+                    new bootstrap.Collapse(navbarCollapse).hide();
+                }
+                
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+            
+            document.addEventListener('click', function(e) {
+                if (e.target.matches('.nav-link') || e.target.closest('.nav-link')) {
+                    e.preventDefault();
+                    const targetLink = e.target.matches('.nav-link') ? e.target : e.target.closest('.nav-link');
+                    const targetSection = targetLink.getAttribute('data-target');
+                    showSection(targetSection);
+                }
+                
+                if (e.target.matches('.profile-icon') || e.target.closest('.profile-icon')) {
+                    e.preventDefault();
+                    updateProfileForm();
+                    showSection('profile');
+                }
+                
+                if (e.target.matches('footer a[data-target]') || e.target.closest('footer a[data-target]')) {
+                    e.preventDefault();
+                    const targetLink = e.target.matches('a') ? e.target : e.target.closest('a');
+                    const targetSection = targetLink.getAttribute('data-target');
+                    showSection(targetSection);
+                }
+            });
+            
+            showSection('home');
+            
+            function setupProfileImageUpload() {
+                const profileImageInput = document.getElementById('profileImageInput');
+                const profilePicture = document.getElementById('profilePicture');
+                const profileImageAlert = document.getElementById('profileImageAlert');
+                const profileImageUpload = document.querySelector('.profile-image-upload');
+                
+                profileImageUpload.addEventListener('click', function() {
+                    profileImageInput.click();
+                });
+                
+                profileImageInput.addEventListener('change', function(e) {
+                    const file = e.target.files[0];
+                    
+                    if (file) {
+                        const maxSize = 2 * 1024 * 1024;
+                        
+                        if (file.size > maxSize) {
+                            profileImageAlert.textContent = 'Ukuran file terlalu besar. Maksimal 2 MB.';
+                            profileImageAlert.classList.remove('d-none');
+                            return;
+                        }
+                        
+                        if (!file.type.match('image.*')) {
+                            profileImageAlert.textContent = 'File harus berupa gambar.';
+                            profileImageAlert.classList.remove('d-none');
+                            return;
+                        }
+                        
+                        profileImageAlert.classList.add('d-none');
+                        
+                        const reader = new FileReader();
+                        
+                        reader.onload = function(e) {
+                            currentUser.profilePicture = e.target.result;
+                            
+                            profilePicture.src = e.target.result;
+                            
+                            updateProfileImageInNavbar();
+                            
+                            alert('Foto profil berhasil diubah!');
+                        };
+                        
+                        reader.readAsDataURL(file);
+                    }
+                });
+            }
+            
+            function updateProfileImageInNavbar() {
+                const profileIcon = document.querySelector('.profile-icon');
+                if (profileIcon && currentUser && currentUser.profilePicture) {
+                    profileIcon.src = currentUser.profilePicture;
+                }
+            }
+            
+            function updateForumUI() {
+                const postFormContainer = document.getElementById('postFormContainer');
+                const commentForms = document.querySelectorAll('.comment-form-container');
+                
+                if (isLoggedIn && currentUser) {
+                    postFormContainer.innerHTML = `
+                        <div class="post-form">
+                            <h2 class="h5 mb-3">Tulis sesuatu di sini</h2>
+                            <form id="newPostForm">
+                                <div class="mb-3">
+                                    <label for="postContent" class="form-label">Postingan Anda</label>
+                                    <textarea class="form-control" id="postContent" rows="4" required placeholder="Apa yang ingin Anda bagikan?"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="postImage" class="form-label">Upload Gambar (Opsional)</label>
+                                    <input type="file" class="form-control" id="postImage" accept="image/*">
+                                    <div class="mt-2">
+                                        <img id="imagePreview" class="image-preview" src="#" alt="Preview Gambar">
+                                    </div>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-mobile">
+                                    <i class="fas fa-paper-plane me-1"></i> Post
+                                </button>
+                            </form>
+                        </div>
+                    `;
+                    
+                    const postImageInput = document.getElementById('postImage');
+                    const imagePreview = document.getElementById('imagePreview');
+                    
+                    postImageInput.addEventListener('change', function() {
+                        const file = this.files[0];
+                        if (file) {
+                            const reader = new FileReader();
+                            reader.onload = function(e) {
+                                imagePreview.src = e.target.result;
+                                imagePreview.style.display = 'block';
+                            }
+                            reader.readAsDataURL(file);
+                        } else {
+                            imagePreview.style.display = 'none';
+                        }
+                    });
+                    
+                    const newPostForm = document.getElementById('newPostForm');
+                    newPostForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        
+                        const postContent = document.getElementById('postContent').value;
+                        const postImageInput = document.getElementById('postImage');
+                        
+                        if (postContent) {
+                            const postsContainer = document.getElementById('postsContainer');
+                            const newPost = document.createElement('div');
+                            newPost.className = 'forum-post';
+                            newPost.setAttribute('data-post-id', Date.now());
+                            
+                            let imageHTML = '';
+                            if (postImageInput.files.length > 0) {
+                                const reader = new FileReader();
+                                reader.onload = function(e) {
+                                    imageHTML = `<img src="${e.target.result}" class="post-image" alt="Gambar postingan">`;
+                                    newPost.innerHTML = `
+                                        <p class="forum-username">${currentUser.username}</p>
+                                        <p>${postContent}</p>
+                                        ${imageHTML}
+                                        <div class="comment-section">
+                                            <h6 class="mb-3">Komentar (0)</h6>
+                                            <div class="comment-form-container">
+                                                <form class="comment-form">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control" placeholder="Tulis komentar..." required>
+                                                        <button class="btn btn-outline-primary btn-mobile" type="submit">
+                                                            <i class="fas fa-paper-plane"></i>
+                                                        </button>
+                                                    </div>
+                                                </form>
+                                            </div>
+                                        </div>
+                                    `;
+                                    
+                                    postsContainer.prepend(newPost);
+                                    
+                                    newPostForm.reset();
+                                    imagePreview.style.display = 'none';
+                                    
+                                    currentUser.postCount = (currentUser.postCount || 0) + 1;
+                                    document.getElementById('postCount').textContent = currentUser.postCount;
+                                    
+                                    alert('Postingan berhasil ditambahkan!');
+                                };
+                                reader.readAsDataURL(postImageInput.files[0]);
+                            } else {
+                                newPost.innerHTML = `
+                                    <p class="forum-username">${currentUser.username}</p>
+                                    <p>${postContent}</p>
+                                    <div class="comment-section">
+                                        <h6 class="mb-3">Komentar (0)</h6>
+                                        <div class="comment-form-container">
+                                            <form class="comment-form">
+                                                <div class="input-group">
+                                                    <input type="text" class="form-control" placeholder="Tulis komentar..." required>
+                                                    <button class="btn btn-outline-primary btn-mobile" type="submit">
+                                                        <i class="fas fa-paper-plane"></i>
+                                                    </button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                `;
+                                
+                                postsContainer.prepend(newPost);
+                                
+                                newPostForm.reset();
+                                imagePreview.style.display = 'none';
+                                
+                                currentUser.postCount = (currentUser.postCount || 0) + 1;
+                                document.getElementById('postCount').textContent = currentUser.postCount;
+                                
+                                alert('Postingan berhasil ditambahkan!');
+                            }
+                        }
+                    });
+                    
+                    updateCommentForms();
+                } else {
+                    postFormContainer.innerHTML = `
+                        <div class="login-required">
+                            <p><i class="fas fa-exclamation-circle me-2"></i> Anda harus <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">login</a> untuk membuat postingan.</p>
+                        </div>
+                    `;
+                    
+                    commentForms.forEach(container => {
+                        container.innerHTML = `
+                            <div class="login-required small">
+                                <p><i class="fas fa-exclamation-circle me-1"></i> <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a> untuk menambahkan komentar.</p>
+                            </div>
+                        `;
+                    });
+                }
+            }
+            
+            function updateCommentForms() {
+                const commentForms = document.querySelectorAll('.comment-form-container');
+                
+                commentForms.forEach(container => {
+                    if (!container.querySelector('form') || container.querySelector('.login-required')) {
+                        if (isLoggedIn) {
+                            container.innerHTML = `
+                                <form class="comment-form">
+                                    <div class="input-group">
+                                        <input type="text" class="form-control" placeholder="Tulis komentar..." required>
+                                        <button class="btn btn-outline-primary btn-mobile" type="submit">
+                                            <i class="fas fa-paper-plane"></i>
+                                        </button>
+                                    </div>
+                                </form>
+                            `;
+                        } else {
+                            container.innerHTML = `
+                                <div class="login-required small">
+                                    <p><i class="fas fa-exclamation-circle me-1"></i> <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">Login</a> untuk menambahkan komentar.</p>
+                                </div>
+                            `;
+                        }
+                    }
+                });
+            }
+            
+            function updateEventUI() {
+                const createEventContainer = document.getElementById('createEventContainer');
+                const eventsContainer = document.getElementById('eventsContainer');
+                
+                if (isLoggedIn && currentUser) {
+                    createEventContainer.innerHTML = `
+                        <div class="create-event-form">
+                            <h2 class="h5 mb-3">Buat Event Baru</h2>
+                            <form id="newEventForm">
+                                <div class="mb-3">
+                                    <label for="eventName" class="form-label">Nama Event</label>
+                                    <input type="text" class="form-control" id="eventName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="eventDescription" class="form-label">Deskripsi Event (Opsional)</label>
+                                    <textarea class="form-control" id="eventDescription" rows="3"></textarea>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="eventLocation" class="form-label">Lokasi</label>
+                                    <input type="text" class="form-control" id="eventLocation" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="eventDate" class="form-label">Tanggal</label>
+                                    <input type="date" class="form-control" id="eventDate" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary btn-mobile">
+                                    <i class="fas fa-calendar-plus me-1"></i> Buat Event
+                                </button>
+                            </form>
+                        </div>
+                    `;
+                    
+                    const newEventForm = document.getElementById('newEventForm');
+                    newEventForm.addEventListener('submit', function(e) {
+                        e.preventDefault();
+                        
+                        const eventName = document.getElementById('eventName').value;
+                        const eventDescription = document.getElementById('eventDescription').value;
+                        const eventLocation = document.getElementById('eventLocation').value;
+                        const eventDate = document.getElementById('eventDate').value;
+                        
+                        if (eventName && eventLocation && eventDate) {
+                            const dateObj = new Date(eventDate);
+                            const formattedDate = dateObj.toLocaleDateString('id-ID', {
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric'
+                            });
+                            
+                            const newEvent = {
+                                id: events.length + 1,
+                                name: eventName,
+                                description: eventDescription,
+                                location: eventLocation,
+                                date: formattedDate,
+                                interestedCount: 0
+                            };
+                            
+                            events.unshift(newEvent);
+                            
+                            renderEvents();
+                            
+                            newEventForm.reset();
+                            
+                            currentUser.eventCount = (currentUser.eventCount || 0) + 1;
+                            document.getElementById('eventCount').textContent = currentUser.eventCount;
+                            
+                            alert('Event berhasil dibuat!');
+                        }
+                    });
+                } else {
+                    createEventContainer.innerHTML = `
+                        <div class="login-required">
+                            <p><i class="fas fa-exclamation-circle me-2"></i> Anda harus <a href="#" data-bs-toggle="modal" data-bs-target="#loginModal">login</a> untuk membuat event.</p>
+                        </div>
+                    `;
+                }
+                
+                renderEvents();
+            }
+            
+            function renderEvents() {
+                const eventsContainer = document.getElementById('eventsContainer');
+                eventsContainer.innerHTML = '';
+                
+                events.forEach(event => {
+                    const eventCard = document.createElement('div');
+                    eventCard.className = 'card event-card mb-3';
+                    eventCard.setAttribute('data-event-id', event.id);
+                    eventCard.innerHTML = `
+                        <div class="card-body">
+                            <p class="event-date">${event.date}</p>
+                            <h2 class="h4 mb-3">${event.name}</h2>
+                            <p>${event.description}</p>
+                            <div class="d-flex justify-content-between align-items-center mt-4 flex-column flex-md-row">
+                                <div class="mb-3 mb-md-0">
+                                    <p class="mb-0"><i class="fas fa-map-marker-alt me-2"></i>${event.location}</p>
+                                </div>
+                                <button class="btn btn-interest btn-mobile interest-btn">
+                                    <i class="fas fa-heart me-2"></i>Tertarik
+                                </button>
+                            </div>
+                            <div class="mt-3">
+                                <p><strong>${event.interestedCount} orang</strong> tertarik dengan event ini</p>
+                            </div>
+                        </div>
+                    `;
+                    
+                    eventsContainer.appendChild(eventCard);
+                });
+                
+                document.querySelectorAll('.interest-btn').forEach(button => {
+                    button.addEventListener('click', function() {
+                        if (!isLoggedIn) {
+                            const loginRequiredModal = new bootstrap.Modal(document.getElementById('loginRequiredModal'));
+                            loginRequiredModal.show();
+                        } else {
+                            const eventCard = this.closest('.event-card');
+                            const eventId = parseInt(eventCard.getAttribute('data-event-id'));
+                            const event = events.find(e => e.id === eventId);
+                            
+                            if (event) {
+                                event.interestedCount++;
+                                this.closest('.event-card').querySelector('.mt-3 p strong').textContent = `${event.interestedCount} orang`;
+                                
+                                currentUser.eventCount = (currentUser.eventCount || 0) + 1;
+                                document.getElementById('eventCount').textContent = currentUser.eventCount;
+                                
+                                alert('Anda tertarik dengan event ini!');
+                            }
+                        }
+                    });
+                });
+            }
+            
+            let selectedAmount = 0;
+            const donationOptions = document.querySelectorAll('.donation-option');
+            const customAmountInput = document.getElementById('customAmount');
+            const donateButton = document.getElementById('donateButton');
+            const donationAmountText = document.getElementById('donationAmountText');
+            const confirmDonationButton = document.getElementById('confirmDonation');
+            const donationModal = new bootstrap.Modal(document.getElementById('donationModal'));
+            
+            donationOptions.forEach(option => {
+                option.addEventListener('click', function() {
+                    donationOptions.forEach(btn => {
+                        btn.classList.remove('btn-primary');
+                        btn.classList.add('btn-outline-secondary');
+                    });
+                    
+                    this.classList.remove('btn-outline-secondary');
+                    this.classList.add('btn-primary');
+                    
+                    selectedAmount = parseInt(this.getAttribute('data-amount'));
+                    customAmountInput.value = '';
+                });
+            });
+            
+            customAmountInput.addEventListener('input', function() {
+                donationOptions.forEach(btn => {
+                    btn.classList.remove('btn-primary');
+                    btn.classList.add('btn-outline-secondary');
+                });
+                
+                selectedAmount = this.value ? parseInt(this.value.replace(/\D/g, '')) : 0;
+            });
+            
+            donateButton.addEventListener('click', function() {
+                if (selectedAmount > 0) {
+                    const formattedAmount = new Intl.NumberFormat('id-ID', {
+                        style: 'currency',
+                        currency: 'IDR'
+                    }).format(selectedAmount);
+                    
+                    donationAmountText.textContent = formattedAmount;
+                    
+                    donationModal.show();
+                } else {
+                    alert('Silakan pilih atau masukkan jumlah donasi terlebih dahulu.');
+                }
+            });
+            
+            confirmDonationButton.addEventListener('click', function() {
+                donationModal.hide();
+                
+                alert('Terima kasih! Donasi Anda telah berhasil.');
+                
+                donationOptions.forEach(btn => {
+                    btn.classList.remove('btn-primary');
+                    btn.classList.add('btn-outline-secondary');
+                });
+                customAmountInput.value = '';
+                selectedAmount = 0;
+            });
+            
+            const loginForm = document.getElementById('loginForm');
+            const loginModal = new bootstrap.Modal(document.getElementById('loginModal'));
+            const registerModal = new bootstrap.Modal(document.getElementById('registerModal'));
+            
+            loginForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const username = document.getElementById('loginUsername').value;
+                const password = document.getElementById('loginPassword').value;
+                
+                if (username && password) {
+                    isLoggedIn = true;
+                    currentUser = {
+                        name: username,
+                        username: username,
+                        email: `${username}@example.com`,
+                        phone: '',
+                        bio: '',
+                        joinDate: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
+                        postCount: 0,
+                        eventCount: 0,
+                        catCount: 0,
+                        profilePicture: null
+                    };
+                    
+                    updateLoginUI();
+                    
+                    loginModal.hide();
+                    
+                    loginForm.reset();
+                    
+                    alert(`Login berhasil! Selamat datang, ${username}.`);
+                } else {
+                    alert('Silakan isi username dan password.');
+                }
+            });
+            
+            const registerForm = document.getElementById('registerForm');
+            
+            registerForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const name = document.getElementById('registerName').value;
+                const username = document.getElementById('registerUsername').value;
+                const email = document.getElementById('registerEmail').value;
+                const phone = document.getElementById('registerPhone').value;
+                const bio = document.getElementById('registerBio').value;
+                const password = document.getElementById('registerPassword').value;
+                const confirmPassword = document.getElementById('registerConfirmPassword').value;
+                
+                if (password !== confirmPassword) {
+                    alert('Password dan konfirmasi password tidak cocok.');
+                    return;
+                }
+                
+                isLoggedIn = true;
+                currentUser = {
+                    name: name,
+                    username: username,
+                    email: email,
+                    phone: phone,
+                    bio: bio,
+                    joinDate: new Date().toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' }),
+                    postCount: 0,
+                    eventCount: 0,
+                    catCount: 0,
+                    profilePicture: null
+                };
+                
+                updateLoginUI();
+                
+                updateProfileForm();
+                
+                registerModal.hide();
+                
+                registerForm.reset();
+                
+                alert(`Pendaftaran berhasil! Selamat datang, ${name}.`);
+            });
+            
+            function updateProfileForm() {
+                if (currentUser) {
+                    document.getElementById('fullName').value = currentUser.name || '';
+                    document.getElementById('profileUsername').value = currentUser.username || '';
+                    document.getElementById('profileEmail').value = currentUser.email || '';
+                    document.getElementById('profilePhone').value = currentUser.phone || '';
+                    document.getElementById('profileBio').value = currentUser.bio || '';
+                    document.getElementById('joinDate').value = currentUser.joinDate || '';
+                    
+                    const profilePicture = document.getElementById('profilePicture');
+                    if (currentUser.profilePicture) {
+                        profilePicture.src = currentUser.profilePicture;
+                    } else {
+                        profilePicture.src = "https://via.placeholder.com/150";
+                    }
+                    
+                    document.getElementById('postCount').textContent = currentUser.postCount || 0;
+                    document.getElementById('eventCount').textContent = currentUser.eventCount || 0;
+                    document.getElementById('catCount').textContent = currentUser.catCount || 0;
+                }
+            }
+            
+            function updateLoginUI() {
+                const userSection = document.getElementById('userSection');
+                const navMenu = document.querySelector('.navbar-nav');
+                
+                if (isLoggedIn && currentUser) {
+                    userSection.innerHTML = `
+                        <div class="user-info">
+                            <p class="user-name">Halo, ${currentUser.name}</p>
+                            <img src="${currentUser.profilePicture || 'https://ui-avatars.com/api/?name=' + encodeURIComponent(currentUser.name) + '&background=6c757d&color=fff&size=40'}" 
+                                 alt="Profile" class="profile-icon" data-target="profile">
+                        </div>
+                    `;
+                    
+                    let existingProfileItem = document.querySelector('a[data-target="profile"]');
+                    if (!existingProfileItem) {
+                        const profileNavItem = document.createElement('li');
+                        profileNavItem.className = 'nav-item';
+                        profileNavItem.innerHTML = `
+                            <a class="nav-link" href="#" data-target="profile">
+                                <i class="fas fa-user me-1"></i> <span>Profil</span>
+                            </a>
+                        `;
+                        navMenu.appendChild(profileNavItem);
+                    }
+                    
+                    let existingSettingsItem = document.querySelector('a[data-target="settings"]');
+                    if (!existingSettingsItem) {
+                        const settingsNavItem = document.createElement('li');
+                        settingsNavItem.className = 'nav-item';
+                        settingsNavItem.innerHTML = `
+                            <a class="nav-link" href="#" data-target="settings">
+                                <i class="fas fa-cog me-1"></i> <span>Pengaturan</span>
+                            </a>
+                        `;
+                        navMenu.appendChild(settingsNavItem);
+                    }
+                    
+                    updateProfileForm();
+                    
+                    updateForumUI();
+                    
+                    updateEventUI();
+                    
+                    setupProfileImageUpload();
+                } else {
+                    userSection.innerHTML = `
+                        <button class="btn btn-outline-primary btn-mobile" data-bs-toggle="modal" data-bs-target="#loginModal">
+                            <i class="fas fa-sign-in-alt me-1"></i> <span>Login</span>
+                        </button>
+                    `;
+                    
+                    const profileNavItem = document.querySelector('a[data-target="profile"]');
+                    if (profileNavItem) {
+                        profileNavItem.closest('li').remove();
+                    }
+                    
+                    const settingsNavItem = document.querySelector('a[data-target="settings"]');
+                    if (settingsNavItem) {
+                        settingsNavItem.closest('li').remove();
+                    }
+                    
+                    updateForumUI();
+                    
+                    updateEventUI();
+                }
+            }
+            
+            const profileForm = document.getElementById('profileForm');
+            profileForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                currentUser.name = document.getElementById('fullName').value;
+                currentUser.email = document.getElementById('profileEmail').value;
+                currentUser.phone = document.getElementById('profilePhone').value;
+                currentUser.bio = document.getElementById('profileBio').value;
+                
+                updateLoginUI();
+                
+                alert('Profil berhasil diperbarui!');
+            });
+            
+            const resetPasswordForm = document.getElementById('resetPasswordForm');
+            const resetPasswordModal = new bootstrap.Modal(document.getElementById('resetPasswordModal'));
+            
+            resetPasswordForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const currentPassword = document.getElementById('currentPassword').value;
+                const newPassword = document.getElementById('newPassword').value;
+                const confirmNewPassword = document.getElementById('confirmNewPassword').value;
+                
+                if (newPassword !== confirmNewPassword) {
+                    alert('Password baru dan konfirmasi password tidak cocok.');
+                    return;
+                }
+                
+                resetPasswordModal.hide();
+                resetPasswordForm.reset();
+                
+                alert('Password berhasil direset!');
+            });
+            
+            const changeEmailForm = document.getElementById('changeEmailForm');
+            const changeEmailModal = new bootstrap.Modal(document.getElementById('changeEmailModal'));
+            
+            changeEmailForm.addEventListener('submit', function(e) {
+                e.preventDefault();
+                
+                const newEmail = document.getElementById('newEmail').value;
+                const confirmPassword = document.getElementById('confirmPasswordEmail').value;
+                
+                currentUser.email = newEmail;
+                updateProfileForm();
+                changeEmailModal.hide();
+                changeEmailForm.reset();
+                
+                alert('Email berhasil diubah!');
+            });
+            
+            document.addEventListener('click', function(e) {
+                if (e.target && e.target.id === 'logoutButton') {
+                    isLoggedIn = false;
+                    currentUser = null;
+                    updateLoginUI();
+                    showSection('home');
+                    alert('Anda telah logout.');
+                }
+            });
+            
+            document.getElementById('showRegisterForm').addEventListener('click', function(e) {
+                e.preventDefault();
+                loginModal.hide();
+                registerModal.show();
+            });
+            
+            document.getElementById('showLoginForm').addEventListener('click', function(e) {
+                e.preventDefault();
+                registerModal.hide();
+                loginModal.show();
+            });
+            
+            updateLoginUI();
+        });
+    </script>
+</body>
+</html>
